@@ -1,0 +1,8 @@
+  
+{ 
+    "apikey":     "API_KEY",
+    "satellite":  "us-central-1.tardigrade.io:7777",
+    "bucket":     "BUCKET NAME",
+	"uploadPath": "",
+    "encryptionpassphrase": "ENCRYPTION_PASSPHRASE"
+}

@@ -1,0 +1,6 @@
+{
+    "ip": "http://localhost:8090/",
+    "network": "fluree",
+    "dbid": "test",
+    "storageDirectory": "/FULL/PATH/TO/STORAGE/DIRECTORY/data/ledger"
+}
