@@ -1,6 +1,6 @@
 # Storj-Fluree
 
-This project provides a connection between FlureeDB and the decentrailed cloud storage network, Storj. The functions in this tool allow a FlureeDB snapshot to be streamed to the Storj network. The `.avro` file containing the Fluree snapshot can later be retrieved from Storj and used to create a new database from the snapshot file. Using the first version of the connector framework, this project is provided as-is and without warranty.
+This project provides a connection between FlureeDB and the decentrailed cloud storage network, Storj. The functions in this tool allow a FlureeDB snapshot to be streamed to the Storj network. The `.avro` file containing the Fluree snapshot can later be retrieved from Storj and used to create a new database from the snapshot file. This preview version of the connector framework is provided as-is and without warranty.
 
 This is designed for Fluree 0.11.0 and above and will not work with earlier verions.
 
