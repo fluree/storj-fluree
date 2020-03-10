@@ -1,8 +1,10 @@
-# Storj-Fluree
+# Storj-Fluree v0.2.0
 
-This project provides a connection between FlureeDB and the decentrailed cloud storage network, Storj. The functions in this tool allow a FlureeDB snapshot to be streamed to the Storj network. The `.avro` file containing the Fluree snapshot can later be retrieved from Storj and used to create a new database from the snapshot file. This preview version of the connector framework is provided as-is and without warranty.
+This project provides a connection between Flureeand the decentrailed cloud storage network, Storj. The functions in this tool allow a Fluree snapshot to be streamed to the Storj network. The `.avro` file containing the Fluree snapshot can later be retrieved from Storj and used to create a new database from the snapshot file. This preview version of the connector framework is provided as-is and without warranty.
 
 This is designed for Fluree 0.11.0 and above and will not work with earlier verions.
+
+## Developed using libuplink version : v1.0.0-rc.3
 
 ## Initial Set-up
 
@@ -11,26 +13,15 @@ Make sure your `PATH` includes the `$GOPATH/bin` directory, so that your command
 export PATH=$PATH:$GOPATH/bin
 ```
 
-Install [github.com/urfave/cli](https://github.com/urfave/cli), by running: 
+Install dependencies by running: 
 ```
-$ go get github.com/urfave/cli
-```
-Install [storj-uplink](https://godoc.org/storj.io/storj/lib/uplink) go package, by running:
-```
-$ go get storj.io/storj/lib/uplink
-```
-
-## Configure Packages
-```
-$ chmod 555 configure.sh
-$ ./configure.sh
+$ go get
 ```
 
 ## Build ONCE
 ```
 $ go build storj_fluree.go
 ```
-
 
 ## Set-up Files
 * Create a `db_property.json` file, with following contents about a FlureeDB instance:

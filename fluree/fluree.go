@@ -36,11 +36,13 @@ func LoadFlureeConfiguration(fullFileName string) (ConfigFluree, error) { // ful
 	jsonParser.Decode(&configFluree)
 
 	// Display read information.
-	fmt.Println("Read Fluree configuration from the", fullFileName, "file")
-	fmt.Println("\nIP:", configFluree.IP)
-	fmt.Println("Network:", configFluree.Network)
-	fmt.Println("DBID:", configFluree.DBID)
-	fmt.Println("Storage Directory:", configFluree.StorageDirectory)
+	if DEBUG {
+		fmt.Println("Read Fluree configuration from the", fullFileName, "file")
+		fmt.Println("\nIP:", configFluree.IP)
+		fmt.Println("Network:", configFluree.Network)
+		fmt.Println("DBID:", configFluree.DBID)
+		fmt.Println("Storage Directory:", configFluree.StorageDirectory)
+	}
 
 	return configFluree, nil
 }

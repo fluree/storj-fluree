@@ -1,1 +1,3 @@
 storj_fluree
+*.avro
+test/uploaddata_*.json

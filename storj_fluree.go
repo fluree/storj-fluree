@@ -7,9 +7,8 @@ import (
 	"os"
 	"time"
 
-	"fluree"
-	"storjSnapshot"
-
+	"github.com/fluree/storj-fluree/fluree"
+	"github.com/fluree/storj-fluree/storj"
 	"github.com/urfave/cli"
 )
 
@@ -24,14 +23,14 @@ var app = cli.NewApp()
 func setAppInfo() {
 	app.Name = "Storj-Fluree Connector"
 	app.Usage = "A Storj-Fluree connector. Upload and retrieve Fluree snapshot files on Storj."
-	app.Version = "0.1.0"
+	app.Version = "0.2.0"
 }
 
 // helper function to flag debug
 func setDebug(debugVal bool) {
 	gbDEBUG = debugVal
 	fluree.DEBUG = debugVal
-	storjSnapshot.DEBUG = debugVal
+	storj.DEBUG = debugVal
 }
 
 func contains(arr []string, item string) bool {
@@ -47,7 +46,7 @@ func contains(arr []string, item string) bool {
 // setCommands sets various command-line options for the app.
 func setCommands() {
 
-	app.Commands = []*cli.Command{
+	app.Commands = []cli.Command{
 		{
 			Name:    "snapshot",
 			Aliases: []string{"sn"},
@@ -58,8 +57,8 @@ func setCommands() {
 				var fullFileName = dbConfigFile
 
 				// process arguments
-				if cliContext.Args().Len() > 0 {
-					for i := 0; i < cliContext.Args().Len(); i++ {
+				if len(cliContext.Args()) > 0 {
+					for i := 0; i < len(cliContext.Args()); i++ {
 
 						// Incase, debug is provided as argument.
 						if cliContext.Args().Get(i) == "debug" {
@@ -98,8 +97,8 @@ func setCommands() {
 				var fullFileName = dbConfigFile
 
 				// process arguments
-				if cliContext.Args().Len() > 0 {
-					for i := 0; i < cliContext.Args().Len(); i++ {
+				if len(cliContext.Args()) > 0 {
+					for i := 0; i < len(cliContext.Args()); i++ {
 
 						// Incase, debug is provided as argument.
 						if cliContext.Args().Get(i) == "debug" {
@@ -136,15 +135,15 @@ func setCommands() {
 			Name:    "test",
 			Aliases: []string{"t"},
 			Usage:   "Command to read and parse JSON information about Storj network and upload sample JSON data",
-			//\n arguments- 1. fileName [optional] = provide full file name (with complete path), storing Storj configuration information if this fileName is not given, then data is read from ./config/storj_config.json example = ./storj_mongodb s ./config/storj_config.json\n\n\n",
+			//\n arguments- 1. fileName [optional] = provåßide full file name (with complete path), storing Storj configuration information if this fileName is not given, then data is read from ./config/storj_config.json example = ./storj_mongodb s ./config/storj_config.json\n\n\n",
 			Action: func(cliContext *cli.Context) error {
 
 				// Default Storj configuration file name.
 				var fullFileName = storjConfigFile
 
 				// process arguments
-				if cliContext.Args().Len() > 0 {
-					for i := 0; i < cliContext.Args().Len(); i++ {
+				if len(cliContext.Args()) > 0 {
+					for i := 0; i < len(cliContext.Args()); i++ {
 
 						// Incase, debug is provided as argument.
 						if cliContext.Args().Get(i) == "debug" {
@@ -162,7 +161,7 @@ func setCommands() {
 				if gbDEBUG {
 					t := time.Now()
 					time := t.Format("2006-01-02_15:04:05")
-					var fileName = "uploaddata_" + time + ".json"
+					var fileName = "test/uploaddata_" + time + ".json"
 
 					err := ioutil.WriteFile(fileName, testData, 0644)
 					if err != nil {
@@ -172,7 +171,7 @@ func setCommands() {
 
 				fileName := "test.json"
 
-				err := storjSnapshot.ConnectStorjUploadData(fullFileName, []byte(testData), fileName, dbName)
+				err := storj.ConnectStorjUploadData(fullFileName, []byte(testData), fileName, dbName)
 				if err != nil {
 					fmt.Println("Error while uploading data to the Storj bucket")
 				}
@@ -195,8 +194,8 @@ func setCommands() {
 				// process arguments - Reading fileName from the command line.
 				var foundFirstFileName = false
 				var foundSecondFileName = false
-				if cliContext.Args().Len() > 0 {
-					for i := 0; i < cliContext.Args().Len(); i++ {
+				if len(cliContext.Args()) > 0 {
+					for i := 0; i < len(cliContext.Args()); i++ {
 						// Incase debug is provided as argument.
 						if cliContext.Args().Get(i) == "debug" {
 							setDebug(true)
@@ -243,7 +242,9 @@ func setCommands() {
 					}
 
 					snapshotName = lastSnapshot
-					fmt.Printf("The latest snapshot is %s\n", snapshotName)
+					if gbDEBUG {
+						fmt.Printf("The latest snapshot is %s\n", snapshotName)
+					}
 				}
 
 				if gbDEBUG {
@@ -259,7 +260,7 @@ func setCommands() {
 				// Connecting to storj network for uploading data.
 				dbname := flureeConfig.Network + "/" + flureeConfig.DBID
 
-				err = storjSnapshot.ConnectStorjUploadData(fullFileNameStorj, []byte(data), snapshotName, dbname)
+				err = storj.ConnectStorjUploadData(fullFileNameStorj, []byte(data), snapshotName, dbname)
 				if err != nil {
 					fmt.Println("Error while uploading data to bucket ", err)
 				}

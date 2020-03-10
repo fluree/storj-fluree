@@ -1,0 +1,1 @@
+Run ./storj_fluree test debug or ./storj_fluree store debug to populate this folder with the data you are uploading.
