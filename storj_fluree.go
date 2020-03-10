@@ -185,6 +185,7 @@ func setCommands() {
 			Usage:   "Command to connect and place Fluree snapshot to given Storj Bucket in JSON format",
 			//\n    arguments-\n      1. fileName [optional] = provide full file name (with complete path), storing Fluree properties in JSON format\n   if this fileName is not given, then data is read from ./config/db_property.json\n      2. fileName [optional] = provide full file name (with complete path), storing Storj configuration in JSON format\n     if this fileName is not given, then data is read from ./config/storj_config.json\n    3. snapshotName [optional] = provide snapshot file name, if not given, then the latest snapshot is used. example = ./storj_mongodb s ./config/db_property.json ./config/storj_config.json\n",
 			Action: func(cliContext *cli.Context) error {
+				fmt.Println("Initializing store data.")
 
 				// Default configuration file names.
 				var fullFileNameStorj = storjConfigFile
